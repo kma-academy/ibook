@@ -1,0 +1,53 @@
+{
+  "root": "apps/feature-genre",
+  "sourceRoot": "apps/feature-genre/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/feature-genre",
+        "main": "apps/feature-genre/src/main.ts",
+        "tsConfig": "apps/feature-genre/tsconfig.app.json",
+        "assets": ["apps/feature-genre/src/assets"],
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/feature-genre/src/environments/environment.ts",
+              "with": "apps/feature-genre/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "feature-genre:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/feature-genre/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/feature-genre"],
+      "options": {
+        "jestConfig": "apps/feature-genre/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
