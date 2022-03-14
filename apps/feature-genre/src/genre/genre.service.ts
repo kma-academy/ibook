@@ -5,7 +5,7 @@ import { UpdateGenreDto } from './dto/update-genre.dto';
 @Injectable()
 export class GenreService {
   create(createGenreDto: CreateGenreDto) {
-    return 'This action adds a new genre';
+    return createGenreDto;
   }
 
   findAll() {

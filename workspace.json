@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "feature-genre": "apps/feature-genre"
+    "feature-genre": "apps/feature-genre",
+    "ibook-backend": "apps/ibook-backend"
   }
 }
