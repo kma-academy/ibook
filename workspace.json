@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "env-validator": "libs/env-validator",
     "feature-genre": "apps/feature-genre",
     "ibook-backend": "apps/ibook-backend"
   }
