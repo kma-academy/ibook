@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "docker:db": "docker-compose -f docker-compose.db.yml up -d"
   },
   "private": true,
   "dependencies": {
@@ -16,12 +17,15 @@
     "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/microservices": "^8.3.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/typeorm": "^8.0.3",
     "apollo-server-express": "^3.6.3",
     "graphql": "^16.3.0",
+    "pg": "^8.7.3",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "typeorm": "^0.2.45"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.0",
