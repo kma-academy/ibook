@@ -1,16 +1,16 @@
 {
-  "root": "apps/ibook-backend",
-  "sourceRoot": "apps/ibook-backend/src",
+  "root": "apps/gateway",
+  "sourceRoot": "apps/gateway/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nrwl/node:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ibook-backend",
-        "main": "apps/ibook-backend/src/main.ts",
-        "tsConfig": "apps/ibook-backend/tsconfig.app.json",
-        "assets": ["apps/ibook-backend/src/assets"],
+        "outputPath": "dist/apps/gateway",
+        "main": "apps/gateway/src/main.ts",
+        "tsConfig": "apps/gateway/tsconfig.app.json",
+        "assets": ["apps/gateway/src/assets"],
         "generatePackageJson": true
       },
       "configurations": {
@@ -20,8 +20,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/ibook-backend/src/environments/environment.ts",
-              "with": "apps/ibook-backend/src/environments/environment.prod.ts"
+              "replace": "apps/gateway/src/environments/environment.ts",
+              "with": "apps/gateway/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -30,21 +30,21 @@
     "serve": {
       "executor": "@nrwl/node:execute",
       "options": {
-        "buildTarget": "ibook-backend:build"
+        "buildTarget": "gateway:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/ibook-backend/**/*.ts"]
+        "lintFilePatterns": ["apps/gateway/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/ibook-backend"],
+      "outputs": ["coverage/apps/gateway"],
       "options": {
-        "jestConfig": "apps/ibook-backend/jest.config.js",
+        "jestConfig": "apps/gateway/jest.config.js",
         "passWithNoTests": true
       }
     }

@@ -6,7 +6,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ClientsModule.register([
       {
         name: 'GENRE_SERVICE',
-        transport: Transport.TCP,
+        transport: Transport.REDIS,
+        options: {
+          url: process.env.TRANSPORT_URL,
+        },
       },
     ]),
   ],

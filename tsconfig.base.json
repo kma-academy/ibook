@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@ibook/env-validator": ["libs/env-validator/src/index.ts"]
-    }
+    },
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "tmp"]
 }
