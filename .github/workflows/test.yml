@@ -1,0 +1,7 @@
+name: ✨
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
