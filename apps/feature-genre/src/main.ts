@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
@@ -19,6 +19,7 @@ async function bootstrap() {
       },
     }
   );
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen();
   Logger.log(`🚀 Feature genre started`);
 }

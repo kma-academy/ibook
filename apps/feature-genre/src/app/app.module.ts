@@ -1,9 +1,8 @@
-import {
-  DatabaseSQLValidateSchema,
-  FeatureGenreValidateSchema,
-} from '@ibook/env-validator';
+import { FeatureGenreValidateSchema } from '@ibook/env-validator';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Genre } from '../genre/entities/genre.entity';
 import { GenreModule } from '../genre/genre.module';
 
 @Module({
@@ -11,6 +10,22 @@ import { GenreModule } from '../genre/genre.module';
     GenreModule,
     ConfigModule.forRoot({
       validationSchema: FeatureGenreValidateSchema,
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          type: 'postgres',
+          host: config.get('DATABASE_HOST'),
+          port: +config.get('DATABASE_PORT'),
+          username: config.get('DATABASE_USERNAME'),
+          password: config.get('DATABASE_PASSWORD'),
+          database: config.get('DATABASE_NAME'),
+          entities: [Genre],
+          synchronize: true,
+        };
+      },
+      imports: [ConfigModule],
     }),
   ],
 })

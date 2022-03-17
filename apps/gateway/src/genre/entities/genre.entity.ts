@@ -10,4 +10,10 @@ export class Genre {
 
   @Field({ nullable: true })
   description: string;
+
+  @Field(() => Int)
+  createBy: number;
+
+  @Field(() => Date)
+  updateAt: Date;
 }

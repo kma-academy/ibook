@@ -1,10 +1,9 @@
+import { UpdateGenreInput } from './dto/update-genre.input';
+import { CreateGenreInput } from './dto/create-genre.input';
+import { CreateGenreDto, UpdateGenreDto } from '@ibook/event-dto';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { firstValueFrom } from 'rxjs';
 import { GENRE_CLIENT } from '../common/constant/service.constant';
-import { CreateGenreInput } from './dto/create-genre.input';
-import { UpdateGenreInput } from './dto/update-genre.input';
-import { Genre } from './entities/genre.entity';
 
 @Injectable()
 export class GenreService {
@@ -14,26 +13,36 @@ export class GenreService {
     private readonly genreClient: ClientProxy
   ) {}
   create(createGenreInput: CreateGenreInput) {
-    const data = this.genreClient.send('createGenre', createGenreInput);
-    data.subscribe({
-      next: (x) => this.logger.log(x),
-    });
+    const dataCreateGenre: CreateGenreDto = {
+      ...createGenreInput,
+      author: 1,
+    };
+    const data = this.genreClient.send('createGenre', dataCreateGenre);
     return data;
   }
 
   findAll() {
-    return `This action returns all genre`;
+    return this.genreClient.send('findAllGenre', {});
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} genre`;
+    return this.genreClient.send('findOneGenre', {
+      id,
+    });
   }
 
   update(id: number, updateGenreInput: UpdateGenreInput) {
-    return `This action updates a #${id} genre`;
+    const dataUpdateGenre: UpdateGenreDto = {
+      ...updateGenreInput,
+      author: 1,
+    };
+    return this.genreClient.send('updateGenre', {
+      id,
+      ...dataUpdateGenre,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} genre`;
+    return this.genreClient.send('deleteGenre', { id });
   }
 }

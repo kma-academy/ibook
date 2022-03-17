@@ -1,26 +1,47 @@
+import { CreateGenreDto, UpdateGenreDto } from '@ibook/event-dto';
 import { Injectable } from '@nestjs/common';
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
+import { RpcException } from '@nestjs/microservices';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Genre } from './entities/genre.entity';
 
 @Injectable()
 export class GenreService {
+  constructor(
+    @InjectRepository(Genre)
+    private readonly genreRepository: Repository<Genre>
+  ) {}
   create(createGenreDto: CreateGenreDto) {
-    return createGenreDto;
+    const { author, ...dataToCreate } = createGenreDto;
+    return this.genreRepository.save({
+      ...dataToCreate,
+      createBy: author,
+    });
   }
 
   findAll() {
-    return `This action returns all genre`;
+    return this.genreRepository.find({});
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} genre`;
+    return this.genreRepository.findOne(id);
   }
 
-  update(id: number, updateGenreDto: UpdateGenreDto) {
-    return `This action updates a #${id} genre`;
+  async update(id: number, updateGenreDto: UpdateGenreDto) {
+    const genreData = this.genreRepository.findOne(id);
+    if (!genreData) throw new RpcException('Genre not found.');
+    const updatedGenre = await this.genreRepository.save({
+      id,
+      ...genreData,
+      ...updateGenreDto,
+    });
+    return updatedGenre;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  async remove(id: number) {
+    const genreData = this.genreRepository.findOne(id);
+    if (!genreData) throw new RpcException('Genre not found.');
+    await this.genreRepository.softDelete(id);
+    return genreData;
   }
 }

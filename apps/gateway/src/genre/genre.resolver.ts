@@ -13,7 +13,7 @@ export class GenreResolver {
     return this.genreService.create(createGenreInput);
   }
 
-  @Query(() => [Genre], { name: 'genre' })
+  @Query(() => [Genre], { name: 'genres' })
   findAll() {
     return this.genreService.findAll();
   }

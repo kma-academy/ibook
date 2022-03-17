@@ -1,10 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { CreateGenreDto, UpdateGenreDto } from '@ibook/event-dto';
+import {
+  ClassSerializerInterceptor,
+  Controller,
+  UseInterceptors,
+} from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { GenreService } from './genre.service';
-import { CreateGenreDto } from './dto/create-genre.dto';
-import { UpdateGenreDto } from './dto/update-genre.dto';
 
 @Controller()
+@UseInterceptors(ClassSerializerInterceptor)
 export class GenreController {
   constructor(private readonly genreService: GenreService) {}
 

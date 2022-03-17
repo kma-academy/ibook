@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ibook/env-validator": ["libs/env-validator/src/index.ts"]
+      "@ibook/env-validator": ["libs/env-validator/src/index.ts"],
+      "@ibook/event-dto": ["libs/event-dto/src/index.ts"]
     },
     "esModuleInterop": true
   },

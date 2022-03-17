@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "env-validator": "libs/env-validator",
+    "event-dto": "libs/event-dto",
     "feature-genre": "apps/feature-genre",
     "gateway": "apps/gateway"
   }
