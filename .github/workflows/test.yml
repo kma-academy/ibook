@@ -28,7 +28,7 @@ jobs:
   pr:
     name: Unit and Synthetic Tests
     runs-on: ubuntu-latest
-    if: ${{ ggithub.event_name == 'pull_request' }}
+    if: ${{ github.event_name == 'pull_request' }}
     steps:
       - uses: actions/checkout@v2
         with:
